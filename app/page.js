@@ -1,16 +1,20 @@
 import Image from "next/image";
-import Navbar from "./components/navbar";
+import NavBar from "./components/navbar";
 
 import data from "./data.json";
 import CountryCard from "./components/country_card";
+import SearchBar from "./components/searchbar";
 
 export default function Home() {
     return (
         <main className="">
-            <Navbar />
-            {data.map((item) => (
-                <CountryCard key={item.name} name={item.name} />
-            ))}
+            <NavBar />
+            <SearchBar />
+            <div className="flex flex-wrap w-full justify-center">
+                {data.map((item) => (
+                    <CountryCard key={item.name} name={item.name} image={item.flag} />
+                ))}
+            </div>
         </main>
     );
 }
