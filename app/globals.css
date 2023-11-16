@@ -2,13 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
     }
-}
+} */
 
 body {
+    background-color: hsl(0, 0%, 98%);
+}
+
+.bg-custom-white {
+    background-color: hsl(0, 0%, 98%);
 }

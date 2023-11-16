@@ -3,9 +3,9 @@ import Image from "next/image";
 
 export default function NavBar() {
     return (
-        <div className="w-full flex flex-row justify-between items-center  h-[5rem] px-[4rem] py-[1rem] shadow-md">
+        <div className="max-[500px]:px-[1rem] w-full flex flex-row justify-between items-center  h-[5rem] px-[4rem] py-[1rem] shadow-md">
             {/* navbar title */}
-            <h2 className="font-bold text-3xl">Where in the world?</h2>
+            <h2 className="font-bold text-3xl max-[600px]:text-xl max-[460px]:text-sm">Where in the world?</h2>
 
             {/* button for light/dark mode */}
             <button className="p-[1rem] h-max">
@@ -13,8 +13,9 @@ export default function NavBar() {
                     <div className="h-[1rem] w-[1rem] relative font-medium">
                         <Image
                             src="/images/moon.svg"
-                            layout="fill"
-                            objectFit="cover"
+                            className="w-full h-full object-cover"
+                            width={16}
+                            height={16}
                             alt="dark-light_mode_button"
                         ></Image>
                     </div>

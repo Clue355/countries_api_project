@@ -10,7 +10,7 @@ export default function Home() {
         <main className="">
             <NavBar />
             <SearchBar />
-            <div className="flex flex-wrap w-full justify-center">
+            <div className="flex flex-wrap justify-center">
                 {data.map((item) => (
                     <CountryCard key={item.name} name={item.name} image={item.flag} />
                 ))}
