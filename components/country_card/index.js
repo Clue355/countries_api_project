@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function CountryCard({ name, image }) {
     return (
-        <Link href={`/${name}/`}>
-            <div className="h-[25rem] w-[17rem] shadow-lg mt-28 mr-10 ml-10 relative rounded bg-white">
+        <div className="h-[25rem] w-[17rem] shadow-lg mt-28 mr-10 ml-10 relative rounded bg-white">
+            <Link href={`/${name}/`}>
                 <div className="h-[10rem] w-full relative">
                     <Image
                         className="rounded-t object-cover w-full h-full"
@@ -19,7 +19,7 @@ export default function CountryCard({ name, image }) {
                         <p>Population:</p> <p>Region:</p> <p>Capitol:</p>
                     </div>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     );
 }
