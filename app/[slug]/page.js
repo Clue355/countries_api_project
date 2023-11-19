@@ -10,6 +10,39 @@ export default function CountryPage({ params }) {
 
     const slugInfo = binarySearch(decodedTarget, countries);
 
+    const currencies = slugInfo.currencies ? (
+        slugInfo.currencies.map((currency, index) => (
+            <span key={index}>
+                {currency.name}
+                {index < slugInfo.currencies.length - 1 ? ", " : ""}
+            </span>
+        ))
+    ) : (
+        <span>No Currency</span>
+    );
+
+    const languages = slugInfo.languages ? (
+        slugInfo.languages.map((language, index) => (
+            <span key={index}>
+                {language.name}
+                {index < slugInfo.languages.length - 1 ? ", " : ""}
+            </span>
+        ))
+    ) : (
+        <span>No Languages</span>
+    );
+
+    const borders = slugInfo.borders ? (
+        slugInfo.borders.map((Border, index) => (
+            <span key={index}>
+                {Border.name}
+                {index < slugInfo.borders.length - 1 ? ", " : ""}
+            </span>
+        ))
+    ) : (
+        <span>No Border Countries</span>
+    );
+
     return (
         <div>
             <NavBar />
@@ -47,23 +80,23 @@ export default function CountryPage({ params }) {
                                 <div className="w-max mr-[8rem]">
                                     <p className="mb-[.5rem]">
                                         <span className="font-semibold">Native Name: </span>
-                                        {`${slugInfo.nativeName}`}
+                                        {slugInfo.nativeName ? slugInfo.nativeName : "No Native Name"}
                                     </p>
                                     <p className="mb-[.5rem]">
                                         <span className="font-semibold">Population: </span>
-                                        {`${slugInfo.population}`}
+                                        {slugInfo.population ? slugInfo.population : "No Population"}
                                     </p>
                                     <p className="mb-[.5rem]">
                                         <span className="font-semibold">Region: </span>
-                                        {`${slugInfo.region}`}
+                                        {slugInfo.region ? slugInfo.region : "No Region"}
                                     </p>
                                     <p className="mb-[.5rem]">
                                         <span className="font-semibold">Sub Region: </span>
-                                        {`${slugInfo.subregion}`}
+                                        {slugInfo.subregion ? slugInfo.subregion : "No Sub Region"}
                                     </p>
                                     <p className="mb-[.5rem]">
                                         <span className="font-semibold">Capital: </span>
-                                        {`${slugInfo.capital}`}
+                                        {slugInfo.capital ? slugInfo.capital : "No Capital"}
                                     </p>
                                 </div>
 
@@ -71,31 +104,22 @@ export default function CountryPage({ params }) {
                                 <div className="w-max">
                                     <p className="mb-[.5rem]">
                                         <span className="font-semibold">Top Level Domain: </span>
-                                        {`${slugInfo.topLevelDomain}`}
+                                        {slugInfo.topLevelDomain ? slugInfo.topLevelDomain : "No Top Level Domain"}
                                     </p>
                                     <p className="mb-[.5rem]">
                                         <span className="font-semibold">Currencies: </span>
-                                        {slugInfo.currencies.map((currency, index) => (
-                                            <span key={index}>
-                                                {currency.name}
-                                                {index < slugInfo.currencies.length - 1 ? ", " : ""}
-                                            </span>
-                                        ))}
+                                        {currencies}
                                     </p>
                                     <p>
                                         <span className="font-semibold">Languages: </span>
-                                        {slugInfo.languages.map((language, index) => (
-                                            <span key={index}>
-                                                {language.name}
-                                                {index < slugInfo.languages.length - 1 ? ", " : ""}
-                                            </span>
-                                        ))}
+                                        {languages}
                                     </p>
                                 </div>
                             </div>
                             {/* border countries section */}
                             <div className="mt-[3rem]">
                                 <p className="font-semibold">Border Countries:</p>
+                                {borders}
                             </div>
                         </div>
                     </div>

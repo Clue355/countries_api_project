@@ -39,8 +39,26 @@ export default function Home() {
             />
             <div className="flex flex-wrap justify-center">
                 {fData.length > 0
-                    ? fData.map((item) => <CountryCard key={item.name} name={item.name} image={item.flag} />)
-                    : data.map((item) => <CountryCard key={item.name} name={item.name} image={item.flag} />)}
+                    ? fData.map((item) => (
+                          <CountryCard
+                              key={item.name}
+                              name={item.name}
+                              image={item.flag}
+                              pop={item.population}
+                              region={item.region}
+                              capital={item.capital}
+                          />
+                      ))
+                    : data.map((item) => (
+                          <CountryCard
+                              key={item.name}
+                              name={item.name}
+                              image={item.flag}
+                              pop={item.population}
+                              region={item.region}
+                              capital={item.capital}
+                          />
+                      ))}
             </div>
         </main>
     );
