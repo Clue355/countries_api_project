@@ -1,0 +1,50 @@
+export const findObject = (target, arr, region) => {
+    // Change region none to empty string
+    if (region === "none") {
+        region = "";
+    }
+
+    // Function to normalize a string if needed
+    const normalizeString = (str) => {
+        return /[^\u0000-\u007F]+/.test(str)
+            ? str
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .toLowerCase()
+            : str.toLowerCase();
+    };
+
+    // Normalize target and region for case-insensitive comparison
+    const normalizedTarget = normalizeString(target);
+    const normalizedRegion = normalizeString(region);
+
+    // Exit condition if neither target nor region is provided
+    if (normalizedTarget === "" && normalizedRegion === "") {
+        return arr;
+    }
+
+    // Filter based on region and target
+    let filtered = arr.filter((obj) => {
+        const objNameNormalized = normalizeString(obj.name);
+        const objRegionNormalized = normalizeString(obj.region);
+
+        if (normalizedRegion) {
+            return (
+                objRegionNormalized === normalizedRegion &&
+                (normalizedTarget === "" || objNameNormalized.includes(normalizedTarget))
+            );
+        }
+        return normalizedTarget !== "" && objNameNormalized.includes(normalizedTarget);
+    });
+
+    // Sort the filtered array based on the closeness of the match to the target letters
+    if (normalizedTarget !== "") {
+        filtered = filtered.sort((a, b) => {
+            const indexA = normalizeString(a.name).indexOf(normalizedTarget);
+            const indexB = normalizeString(b.name).indexOf(normalizedTarget);
+            return indexA - indexB;
+        });
+    }
+
+    return filtered;
+};

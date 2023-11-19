@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 export default function SearchBar({ input, inputChange, region, setRegion, dropdownChange }) {
     useEffect(() => {
-        setRegion("filter");
+        setRegion("");
     }, [setRegion]);
 
     return (
@@ -35,11 +35,12 @@ export default function SearchBar({ input, inputChange, region, setRegion, dropd
                     value={region}
                     onChange={dropdownChange}
                 >
-                    <option value="filter" disabled hidden>
+                    <option value="" disabled hidden>
                         Filter by Region
                     </option>
+                    <option value="none">None</option>
                     <option value="africa">Africa</option>
-                    <option value="america">America</option>
+                    <option value="americas">America</option>
                     <option value="asia">Asia</option>
                     <option value="europe">Europe</option>
                     <option value="oceana">Oceana</option>

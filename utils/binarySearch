@@ -1,22 +1,25 @@
-function binarySearch(target, arr) {
+export const binarySearch = (target, arr) => {
+    // Normalize the target string
+    const normalizedTarget = target.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
     let left = 0;
     let right = arr.length - 1;
 
     while (left <= right) {
         let mid = Math.floor((left + right) / 2);
 
-        // Check if the middle element is the target
-        if (arr[mid] === target) {
-            return mid;
-        } else if (arr[mid] < target) {
-            // If target is greater, ignore left half
+        // Normalize the name of the middle element for comparison
+        let midNameNormalized = arr[mid].name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+        // Compare with the normalized target
+        if (midNameNormalized === normalizedTarget) {
+            return arr[mid];
+        } else if (midNameNormalized < normalizedTarget) {
             left = mid + 1;
         } else {
-            // If target is smaller, ignore right half
             right = mid - 1;
         }
     }
 
-    // If the target is not found in the array
     return -1;
-}
+};

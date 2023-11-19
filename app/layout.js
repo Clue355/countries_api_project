@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
     title: "countries api project",
-    description: "",
+    description: "An application that displays a list of countries and their information.",
 };
 
 export default function RootLayout({ children }) {
