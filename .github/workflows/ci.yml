@@ -29,6 +29,7 @@ jobs:
             - name: Run Cypress tests
               uses: cypress-io/github-action@v2
               with:
+                  config-file: cypress.config.js
                   start: pnpm start
                   wait-on: "http://localhost:3000"
                   wait-on-timeout: 60
