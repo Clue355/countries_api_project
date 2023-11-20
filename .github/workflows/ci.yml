@@ -10,10 +10,10 @@ jobs:
 
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v2
+              uses: actions/checkout@v4.1.1
 
             - name: Set up Node.js
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v4.0.0
               with:
                   node-version: "20.9.0"
 
@@ -27,7 +27,7 @@ jobs:
               run: pnpm build
 
             - name: Run Cypress tests
-              uses: cypress-io/github-action@v2
+              uses: cypress-io/github-action@v6.6.0
               with:
                   config-file: cypress.config.js
                   start: pnpm start
