@@ -23,12 +23,15 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            - name: Run dev environment
-              run: pnpm dev
+            - name: Build
+              run: pnpm build
+
+            - name: Start Application
+              run: pnpm start
 
             - name: Run Cypress tests
               uses: cypress-io/github-action@v2
               with:
-                  start: pnpm cypress:run
+                  start: pnpm start
                   wait-on: "http://localhost:3000"
                   wait-on-timeout: 60
