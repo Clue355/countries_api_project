@@ -1,4 +1,21 @@
 export const binarySearch = (target, arr) => {
+    const normalizeString = (str) => {
+        return /[^\u0000-\u007F]+/.test(str)
+            ? str
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .toLowerCase()
+            : str.toLowerCase();
+    };
+
+    arr.sort((a, b) => {
+        return normalizeString(a.name) < normalizeString(b.name)
+            ? -1
+            : normalizeString(a.name) > normalizeString(b.name)
+            ? 1
+            : 0;
+    });
+
     // Normalize the target string
     const normalizedTarget = target.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
@@ -11,7 +28,6 @@ export const binarySearch = (target, arr) => {
         // Normalize the name of the middle element for comparison
         let midNameNormalized = arr[mid].name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-        // Compare with the normalized target
         if (midNameNormalized === normalizedTarget) {
             return arr[mid];
         } else if (midNameNormalized < normalizedTarget) {
