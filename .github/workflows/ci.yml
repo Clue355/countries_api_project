@@ -1,7 +1,7 @@
 name: Next.js CI/CD
 
 on:
-    push:
+    pull_request:
         branches: [main]
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
               uses: actions/checkout@v2
 
             - name: Set up Node.js
-              uses: actions/setup-node@v20
+              uses: actions/setup-node@v2
               with:
                   node-version: "20.9.0"
 
@@ -23,12 +23,14 @@ jobs:
             - name: Install dependencies
               run: pnpm install
 
-            - name: Run dev environment
-              run: pnpm dev
+            - name: Build
+              run: pnpm build
 
             - name: Run Cypress tests
               uses: cypress-io/github-action@v2
               with:
-                  start: pnpm cypress:run
+                  config-file: cypress.config.js
+                  start: pnpm start
                   wait-on: "http://localhost:3000"
                   wait-on-timeout: 60
+                  install: false
