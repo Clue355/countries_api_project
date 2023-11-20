@@ -17,8 +17,6 @@ Frontend Mentor challenges help you improve your coding skills by building reali
     -   [Useful resources](#useful-resources)
 -   [Author](#author)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
@@ -34,7 +32,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./image.png)
 
 ### Links
 
@@ -47,32 +45,33 @@ Users should be able to:
 -   [Next.js](https://nextjs.org/) - React framework
 -   [Tailwind](https://tailwindui.com/) - For styles
 -   [PnPm](https://pnpm.io/) - disk space efficient package manager
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+-   [Cypress](https://www.cypress.io/) - easily create tests for your modern web applications
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and
-providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+-   How to implement tests on the front-end using Cypress
+    -   Cypress end to end testing basics
+    -   Cypress testing syntax
 
-To see how you can add code snippets, see below:
+```
+describe("My First Test", () => {
+    beforeEach(() => { cy.visit("http://localhost:3000/"); });
 
-```html
-<h1>Some HTML code I'm proud of</h1>
+    it("Finds a search bar", ()
+    => { cy.get("input"); });
+})
 ```
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts
-you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+What I want to continue learning:
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued
-development.**
+-   Adding different tests to my project
 
 ### Useful resources
 
--   [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will
-    use it going forward.
+-   [cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test) -
+    Helped me get started with end to end testing in cypress
 -   [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ.
     I'd recommend it to anyone still learning this concept.
 
