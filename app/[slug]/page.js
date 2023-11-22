@@ -49,8 +49,9 @@ export default function CountryPage({ params }) {
             <div className=" pt-[2rem] flex flex-wrap h-full justify-center">
                 <div className="w-max">
                     {/* back button */}
-                    <Link href="/">
-                        <div className="my-[3rem] w-[8rem] h-[2.5rem] text-center bg-white shadow-md border-none rounded flex items-center justify-center">
+
+                    <div className="my-[3rem] w-[8rem] h-[2.5rem] text-center bg-white shadow-md border-none rounded flex items-center justify-center">
+                        <Link href="/" className="px-[2rem] py-[.5rem] w-max flex items-center justify-center">
                             <Image
                                 src="/images/arrow-back.svg"
                                 width={20}
@@ -59,66 +60,66 @@ export default function CountryPage({ params }) {
                                 className="mr-[.5rem]"
                             />
                             <p className="h-max">Back</p>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
 
                     {/* slug info parent div */}
-                    <div className="flex flex-wrap justify-center w-max">
+                    <div className="ms:w-min ml:w-max max-[1320px]:w-[10rem] max-[1320px]:flex-col flex">
                         {/* image div */}
-                        <div className="w-[30rem] h-[23rem] mr-[5rem] relative ">
+                        <div className="min-[768px]:w-[40rem] min-[768px]:h-[23rem] ml:w-[24rem] ml:h-[17rem] ms:w-[19rem] ms:h-[14rem] max-[1320px]:mb-[2rem] min-[1321px]:mr-[7rem] max-[1320px]:justify-center relative ">
                             <Image src={slugInfo.flag} fill={true} alt={`${slugInfo.name}_flag`} />
                         </div>
 
                         {/* country information div */}
-                        <div className=" flex flex-col flex-wrap ">
+                        <div className="ml:w-max ms:w-[5rem] h-min flex flex-col">
                             {/* title country name */}
                             <h2 className=" my-[2rem] font-bold text-2xl">{slugInfo.name}</h2>
 
                             {/* object property divs */}
-                            <div className="h-[10rem]  flex flex-wrap flex-col justify-between ">
+                            <div className="h-[13rem] max-[768px]:h-max ms:w-[12rem] ml:w-max min-[768px]:flex-row ms:flex-col flex justify-between ">
                                 {/* left container */}
-                                <div className="w-max mr-[8rem]">
-                                    <p className="mb-[.5rem]">
+                                <div className="w-max h-min ml:mr-[8rem] ms:mr-0 ms:mb-[3rem]">
+                                    <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Native Name: </span>
                                         {slugInfo.nativeName ? slugInfo.nativeName : "No Native Name"}
                                     </p>
-                                    <p className="mb-[.5rem]">
+                                    <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Population: </span>
                                         {slugInfo.population ? slugInfo.population : "No Population"}
                                     </p>
-                                    <p className="mb-[.5rem]">
+                                    <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Region: </span>
                                         {slugInfo.region ? slugInfo.region : "No Region"}
                                     </p>
-                                    <p className="mb-[.5rem]">
+                                    <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Sub Region: </span>
                                         {slugInfo.subregion ? slugInfo.subregion : "No Sub Region"}
                                     </p>
-                                    <p className="mb-[.5rem]">
+                                    <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Capital: </span>
                                         {slugInfo.capital ? slugInfo.capital : "No Capital"}
                                     </p>
                                 </div>
 
                                 {/* right container */}
-                                <div className="w-max">
-                                    <p className="mb-[.5rem]">
+                                <div className="w-max h-max max-[768px]:mb-[3rem]">
+                                    <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Top Level Domain: </span>
                                         {slugInfo.topLevelDomain ? slugInfo.topLevelDomain : "No Top Level Domain"}
                                     </p>
-                                    <p className="mb-[.5rem]">
+                                    <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Currencies: </span>
                                         {currencies}
                                     </p>
                                     <p>
-                                        <span className="font-semibold">Languages: </span>
+                                        <span className="font-semibold w-max">Languages: </span>
                                         {languages}
                                     </p>
                                 </div>
                             </div>
                             {/* border countries section */}
-                            <div className="mt-[3rem]">
-                                <p className="font-semibold">Border Countries:</p>
+                            <div className="mb-[5rem]">
+                                <p className="font-semibold w-max">Border Countries:</p>
                                 {borders}
                             </div>
                         </div>
