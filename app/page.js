@@ -28,7 +28,7 @@ export default function Home() {
     }, [input, region]);
 
     return (
-        <main className="">
+        <main className="flex flex-col justify-center items-center min-h-screen ">
             <NavBar />
             <SearchBar
                 input={input}
@@ -37,7 +37,7 @@ export default function Home() {
                 setRegion={setRegion}
                 dropdownChange={handleDropdownChange}
             />
-            <div className="flex flex-wrap justify-center mb-[3rem]">
+            <div className="flex flex-wrap justify-center mb-[3rem] w-full max-w-1440">
                 {fData.length > 0
                     ? fData.map((item) => (
                           <CountryCard
