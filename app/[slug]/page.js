@@ -3,12 +3,27 @@ import Link from "next/link";
 
 import countries from "../data.json";
 import { binarySearch } from "../../utils/binarySearch";
+import { findObject } from "../../utils/findObject";
 import NavBar from "../../components/navbar";
 
 export default function CountryPage({ params }) {
     const decodedTarget = decodeURIComponent(params.slug);
-
     const slugInfo = binarySearch(decodedTarget, countries);
+    const borderList = slugInfo.borders;
+
+    const borderCountries = (alpha3Codes, dataSet) => {
+        const matchingObjects = [];
+        alpha3Codes.forEach((code) => {
+            dataSet.forEach((obj) => {
+                if (obj.alpha3Code === code) {
+                    matchingObjects.push(obj);
+                }
+            });
+        });
+        return matchingObjects;
+    };
+
+    const borderCountriesList = slugInfo.borders ? borderCountries(borderList, countries) : [];
 
     const currencies = slugInfo.currencies ? (
         slugInfo.currencies.map((currency, index) => (
@@ -32,11 +47,15 @@ export default function CountryPage({ params }) {
         <span>No Languages</span>
     );
 
-    const borders = slugInfo.borders ? (
-        slugInfo.borders.map((Border, index) => (
+    const borders = borderCountriesList.length ? (
+        borderCountriesList.map((border, index) => (
             <span key={index}>
-                {Border.name}
-                {index < slugInfo.borders.length - 1 ? ", " : ""}
+                <Link
+                    href={`/${border.name}`}
+                    className="w-[8rem] h-max mr-[.5rem] mb-[.5rem] py-[.5rem] px-[2rem] break-words text-center bg-white shadow-md border-none rounded flex items-center justify-center"
+                >
+                    {border.name}
+                </Link>
             </span>
         ))
     ) : (
@@ -118,8 +137,10 @@ export default function CountryPage({ params }) {
                                 </div>
                             </div>
                             {/* border countries section */}
-                            <div className="mb-[5rem]">
-                                <p className="font-semibold w-max">Border Countries:</p>
+                            <div className="mb-[2rem] h-max min-[425px]:w-[26rem] min-[425px]:flex-row min-[320px]:w-[18.5rem]  min-[768px]:w-[36rem] max-[768px]:w-[20rem] flex flex-wrap  ">
+                                <p className="mr-[1rem] font-semibold  min-[425px]:w-max min-[320px]:w-full">
+                                    Border Countries:
+                                </p>
                                 {borders}
                             </div>
                         </div>
