@@ -7,7 +7,7 @@ export default function SearchBar({ input, inputChange, region, setRegion, dropd
     }, [setRegion]);
 
     return (
-        <div className="w-full h-[5rem] min-[768px]:px-[4rem] ms:px-[2rem] flex flex-wrap justify-between items-center mt-4 ">
+        <div className="w-full h-[5rem] min-[768px]:px-[3.6rem] ms:px-[2rem] flex flex-wrap justify-between items-center mt-4 max-w-1440">
             {/* input box container */}
             <div className="shadow-lg relative ms:w-full min-[821px]:w-[30rem] ">
                 {/* search image */}
