@@ -37,7 +37,7 @@ export default function Home() {
                 setRegion={setRegion}
                 dropdownChange={handleDropdownChange}
             />
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center mb-[3rem]">
                 {fData.length > 0
                     ? fData.map((item) => (
                           <CountryCard
