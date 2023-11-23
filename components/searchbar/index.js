@@ -40,10 +40,12 @@ export default function SearchBar({ input, inputChange, region, setRegion, dropd
                     </option>
                     <option value="none">None</option>
                     <option value="africa">Africa</option>
-                    <option value="americas">America</option>
+                    <option value="americas">Americas</option>
                     <option value="asia">Asia</option>
                     <option value="europe">Europe</option>
-                    <option value="oceana">Oceana</option>
+                    <option value="oceania">Oceania</option>
+                    <option value="polar">Polar</option>
+                    <option value="antarctic ocean">Antarctic</option>
                 </select>
                 {/* down image */}
                 <div className="pointer-events-none absolute inset-y-0 right-2 flex items-center px-2 text-gray-700">
