@@ -1,9 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function CountryCard({ name, image, pop, region, capital }) {
+export default function CountryCard({ name, image, pop, region, capital, theme }) {
     return (
-        <div className="h-[25rem] w-[17rem] shadow-lg mt-28 mr-10 ml-10 relative rounded bg-white">
+        <div
+            className={`h-[25rem] w-[17rem] shadow-lg mt-28 mr-10 ml-10 relative rounded ${
+                theme === "dark" ? "bg-darkModeE" : "bg-lightModeE"
+            }`}
+        >
             <Link href={`/${name}/`} className="">
                 <div className="h-[10rem] w-full relative">
                     <Image

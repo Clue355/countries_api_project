@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect } from "react";
 
-export default function SearchBar({ input, inputChange, region, setRegion, dropdownChange }) {
+export default function SearchBar({ input, inputChange, region, setRegion, dropdownChange, theme }) {
     useEffect(() => {
         setRegion("");
     }, [setRegion]);
@@ -9,14 +9,25 @@ export default function SearchBar({ input, inputChange, region, setRegion, dropd
     return (
         <div className="w-full h-[5rem] min-[768px]:px-[3.6rem] ms:px-[2rem] flex flex-wrap justify-between items-center mt-4 max-w-1440">
             {/* input box container */}
-            <div className="shadow-lg relative ms:w-full min-[821px]:w-[30rem] ">
+            <div
+                className={`shadow-lg relative ms:w-full min-[821px]:w-[30rem] ${
+                    theme === "dark" ? "text-darkModeT" : "text-lightModeT"
+                }`}
+            >
                 {/* search image */}
                 <div className="absolute inset-y-0 left-4 pl-5 flex items-center pointer-events-none">
-                    <Image src="/images/search.svg" width={20} height={20} alt="Search_icon" />
+                    <Image
+                        src={`${theme === "dark" ? "/images/dmsearch.svg" : "/images/search.svg"}`}
+                        width={20}
+                        height={20}
+                        alt="Search_icon"
+                    />
                 </div>
                 {/* search box */}
                 <input
-                    className="w-full h-[3.5rem] rounded bg-white pl-20 bg-white"
+                    className={`w-full h-[3.5rem] rounded pl-20 ${
+                        theme === "dark" ? "bg-darkModeE " : "bg-lightModeE text-lightModeT"
+                    }`}
                     value={input}
                     onChange={inputChange}
                     type="text"
@@ -27,11 +38,17 @@ export default function SearchBar({ input, inputChange, region, setRegion, dropd
             </div>
 
             {/* dropbox container */}
-            <div className="bg-white shadow-lg border-none rounded w-[12rem] h-[3.5rem] relative max-[821px]:mt-[3rem] min-[821px]:mt-0 ">
+            <div
+                className={`shadow-lg border-none rounded w-[12rem] h-[3.5rem] relative max-[821px]:mt-[3rem] min-[821px]:mt-0 ${
+                    theme === "dark" ? "text-darkModeT" : "text-lightModeT"
+                }`}
+            >
                 <select
                     id="options"
                     name="options"
-                    className="bg-white border-none h-full w-full rounded px-4 appearance-none"
+                    className={`border-none h-full w-full rounded px-4 appearance-none ${
+                        theme === "dark" ? "bg-darkModeE" : "bg-lightModeE"
+                    }`}
                     value={region}
                     onChange={dropdownChange}
                 >
