@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap");
+
 /* :root {
 }
 
@@ -11,9 +13,9 @@
 } */
 
 body {
-    background-color: hsl(0, 0%, 98%);
+    font-family: "Nunito Sans", sans-serif;
 }
 
-.bg-custom-white {
+/* .bg-custom-white {
     background-color: hsl(0, 0%, 98%);
-}
+} */

@@ -14,12 +14,22 @@ module.exports = {
             maxWidth: {
                 1440: "1440px",
             },
+            colors: {
+                darkModeBG: "hsl(207, 26%, 17%)",
+                darkModeE: "hsl(209, 23%, 22%)",
+                darkModeT: "hsl(0, 0%, 100%)",
+                lightModeBG: "hsl(0, 0%, 98%)",
+                lightModeT: "hsl(200, 15%, 8%)",
+                lightModeI: "hsl(0, 0%, 52%)",
+                lightModeE: "hsl(0, 0%, 100%)",
+            },
         },
         screens: {
             ms: "320px",
             pmd: "375px",
             ml: "425px",
         },
+        darkMode: "class",
     },
     plugins: [],
 };

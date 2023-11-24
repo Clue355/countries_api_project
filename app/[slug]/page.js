@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,7 +7,16 @@ import { binarySearch } from "../../utils/binarySearch";
 import { findObject } from "../../utils/findObject";
 import NavBar from "../../components/navbar";
 
+import { useAtom } from "jotai";
+import { themeAtom } from "../../atoms/themeAtom";
+
 export default function CountryPage({ params }) {
+    const [theme, setTheme] = useAtom(themeAtom);
+
+    const toggleTheme = () => {
+        setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    };
+
     const decodedTarget = decodeURIComponent(params.slug);
     const slugInfo = binarySearch(decodedTarget, countries);
     const borderList = slugInfo.borders;
@@ -52,7 +62,9 @@ export default function CountryPage({ params }) {
             <span key={index}>
                 <Link
                     href={`/${border.name}`}
-                    className="w-[8rem] h-max mr-[.5rem] mb-[.5rem] py-[.5rem] px-[2rem] break-words text-center bg-white shadow-md border-none rounded flex items-center justify-center"
+                    className={`w-[8rem] h-max mr-[.5rem] mb-[.5rem] py-[.5rem] px-[2rem] break-words text-center shadow-md border-none rounded flex items-center justify-center ${
+                        theme === "dark" ? "bg-darkModeE text-darkModeT" : "bg-lightModeE text-lightModeT"
+                    }`}
                 >
                     {border.name}
                 </Link>
@@ -63,18 +75,26 @@ export default function CountryPage({ params }) {
     );
 
     return (
-        <div>
-            <NavBar />
-            <div className=" pt-[2rem] flex flex-wrap h-full justify-center">
+        <div className={`${theme === "dark" ? "text-darkModeT" : "text-lightModeT"} min-h-screen flex flex-col`}>
+            <NavBar theme={theme} toggleTheme={toggleTheme} />
+            <div
+                className={`flex-grow pt-[2rem] flex flex-wrap h-full justify-center ${
+                    theme === "dark" ? "bg-darkModeBG" : "bg-lightModeBG"
+                }`}
+            >
                 <div className="w-max">
                     {/* back button */}
 
-                    <div className="my-[3rem] w-[8rem] h-[2.5rem] text-center bg-white shadow-md border-none rounded flex items-center justify-center">
+                    <div
+                        className={`my-[3rem] w-[8rem] h-[2.5rem] text-center shadow-md border-none rounded flex items-center justify-center ${
+                            theme === "dark" ? "bg-darkModeE" : "bg-lightModeE"
+                        }`}
+                    >
                         <Link href="/" className="px-[2rem] py-[.5rem] w-max flex items-center justify-center">
                             <Image
-                                src="/images/arrow-back.svg"
+                                src={`${theme === "dark" ? "/images/wback-arrow.png" : "/images/back-arrow.png"}`}
                                 width={20}
-                                height={20}
+                                height={30}
                                 alt="arrow_left"
                                 className="mr-[.5rem]"
                             />
