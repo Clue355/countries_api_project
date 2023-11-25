@@ -22,7 +22,7 @@ export default function CountryCard({ name, image, pop, region, capital, theme }
                     <div className="flex flex-col justify-between">
                         <p className="mb-[.5rem]">
                             <span className="font-semibold">Population: </span>
-                            {pop ? pop : "No Population"}
+                            {pop ? pop.toLocaleString() : "No Population"}
                         </p>{" "}
                         <p className="mb-[.5rem]">
                             <span className="font-semibold">Region: </span>

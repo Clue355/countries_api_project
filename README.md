@@ -72,8 +72,6 @@ What I want to continue learning:
 
 -   [cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test](https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test) -
     Helped me get started with end to end testing in cypress
--   [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ.
-    I'd recommend it to anyone still learning this concept.
 
 ## Author
 
