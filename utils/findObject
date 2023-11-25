@@ -28,7 +28,6 @@ export const findObject = (target, arr, region) => {
 
     // Filter based on region and target
     let filtered = arr.filter((obj) => {
-        console.log(obj);
         const objNameNormalized = normalizeString(obj.name.common);
         const objRegionNormalized = normalizeString(obj.region);
 

@@ -2,44 +2,41 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import countries from "../data.json";
 import { binarySearch } from "../../utils/binarySearch";
 import { findObject } from "../../utils/findObject";
 import NavBar from "../../components/navbar";
 
 import { useAtom } from "jotai";
 import { themeAtom } from "../../atoms/themeAtom";
+import { apiDataAtom } from "../../atoms/apiAtom";
+import { Noto_Sans_Telugu } from "next/font/google";
+import { decode } from "punycode";
 
 export default function CountryPage({ params }) {
     const [theme, setTheme] = useAtom(themeAtom);
+    const [apiData, setApiData] = useAtom(apiDataAtom);
 
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
     };
 
     const decodedTarget = decodeURIComponent(params.slug);
-    const slugInfo = binarySearch(decodedTarget, countries);
+    const slugInfo = binarySearch(decodedTarget, apiData);
     const borderList = slugInfo.borders;
 
     const borderCountries = (alpha3Codes, dataSet) => {
-        const matchingObjects = [];
-        alpha3Codes.forEach((code) => {
-            dataSet.forEach((obj) => {
-                if (obj.alpha3Code === code) {
-                    matchingObjects.push(obj);
-                }
-            });
-        });
-        return matchingObjects;
+        const dataMap = new Map(dataSet.map((obj) => [obj.cca3, obj]));
+        return alpha3Codes.map((code) => dataMap.get(code)).filter((obj) => obj !== undefined);
     };
 
-    const borderCountriesList = slugInfo.borders ? borderCountries(borderList, countries) : [];
+    console.log(borderCountries(borderList, apiData));
+    const borderCountriesList = slugInfo.borders ? borderCountries(borderList, apiData) : [];
 
     const currencies = slugInfo.currencies ? (
-        slugInfo.currencies.map((currency, index) => (
-            <span key={index}>
-                {currency.name}
-                {index < slugInfo.currencies.length - 1 ? ", " : ""}
+        Object.keys(slugInfo.currencies).map((code, index, array) => (
+            <span key={code}>
+                {code}
+                {index < array.length - 1 ? ", " : ""}
             </span>
         ))
     ) : (
@@ -47,32 +44,46 @@ export default function CountryPage({ params }) {
     );
 
     const languages = slugInfo.languages ? (
-        slugInfo.languages.map((language, index) => (
+        Object.values(slugInfo.languages).map((language, index, array) => (
             <span key={index}>
-                {language.name}
-                {index < slugInfo.languages.length - 1 ? ", " : ""}
+                {language}
+                {index < array.length - 1 ? ", " : ""}
             </span>
         ))
     ) : (
-        <span>No Languages</span>
+        <span>No Language</span>
     );
 
     const borders = borderCountriesList.length ? (
         borderCountriesList.map((border, index) => (
             <span key={index}>
                 <Link
-                    href={`/${border.name}`}
+                    href={`/${border.name.common}`}
                     className={`w-[8rem] h-max mr-[.5rem] mb-[.5rem] py-[.5rem] px-[2rem] break-words text-center shadow-md border-none rounded flex items-center justify-center ${
                         theme === "dark" ? "bg-darkModeE text-darkModeT" : "bg-lightModeE text-lightModeT"
                     }`}
                 >
-                    {border.name}
+                    {border.name.common}
                 </Link>
             </span>
         ))
     ) : (
         <span>No Border Countries</span>
     );
+
+    const capitals = slugInfo.capital ? (
+        slugInfo.capital.map((capital, index, array) => (
+            <span key={index}>
+                {capital}
+                {index < array.length - 1 ? ", " : ""}
+            </span>
+        ))
+    ) : (
+        <span>No Capital</span>
+    );
+
+    const firstNativeNameKey = Object.keys(slugInfo.name.nativeName)[0];
+    const officialNativeName = slugInfo.name.nativeName[firstNativeNameKey].common;
 
     return (
         <div className={`${theme === "dark" ? "text-darkModeT" : "text-lightModeT"} min-h-screen flex flex-col`}>
@@ -106,13 +117,13 @@ export default function CountryPage({ params }) {
                     <div className="ms:w-min ml:w-max max-[1320px]:w-[10rem] max-[1320px]:flex-col flex">
                         {/* image div */}
                         <div className="min-[768px]:w-[40rem] min-[768px]:h-[23rem] ml:w-[24rem] ml:h-[17rem] ms:w-[19rem] ms:h-[14rem] max-[1320px]:mb-[2rem] min-[1321px]:mr-[7rem] max-[1320px]:justify-center relative ">
-                            <Image src={slugInfo.flag} fill={true} alt={`${slugInfo.name}_flag`} />
+                            <Image src={slugInfo.flags.svg} fill={true} alt={`${slugInfo.name.common}_flag`} />
                         </div>
 
                         {/* country information div */}
                         <div className="ml:w-max ms:w-[5rem] h-min flex flex-col">
                             {/* title country name */}
-                            <h2 className=" my-[2rem] font-bold text-2xl">{slugInfo.name}</h2>
+                            <h2 className=" my-[2rem] font-bold text-2xl">{slugInfo.name.common}</h2>
 
                             {/* object property divs */}
                             <div className="h-[13rem] max-[768px]:h-max ms:w-[12rem] ml:w-max min-[768px]:flex-row ms:flex-col flex justify-between ">
@@ -120,11 +131,11 @@ export default function CountryPage({ params }) {
                                 <div className="w-max h-min ml:mr-[8rem] ms:mr-0 ms:mb-[3rem]">
                                     <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Native Name: </span>
-                                        {slugInfo.nativeName ? slugInfo.nativeName : "No Native Name"}
+                                        {officialNativeName ? officialNativeName : "No Native Name"}
                                     </p>
                                     <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Population: </span>
-                                        {slugInfo.population ? slugInfo.population : "No Population"}
+                                        {slugInfo.population ? slugInfo.population.toLocaleString() : "No Population"}
                                     </p>
                                     <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Region: </span>
@@ -136,7 +147,7 @@ export default function CountryPage({ params }) {
                                     </p>
                                     <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Capital: </span>
-                                        {slugInfo.capital ? slugInfo.capital : "No Capital"}
+                                        {capitals}
                                     </p>
                                 </div>
 
@@ -144,7 +155,7 @@ export default function CountryPage({ params }) {
                                 <div className="w-max h-max max-[768px]:mb-[3rem]">
                                     <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Top Level Domain: </span>
-                                        {slugInfo.topLevelDomain ? slugInfo.topLevelDomain : "No Top Level Domain"}
+                                        {slugInfo.tld[0] ? slugInfo.tld[0] : "No Top Level Domain"}
                                     </p>
                                     <p className="mb-[.5rem] w-max">
                                         <span className="font-semibold">Currencies: </span>
