@@ -71,7 +71,7 @@ export default function Home() {
         <>
             <NavBar theme={theme} toggleTheme={toggleTheme} />
             <main
-                className={`flex flex-col justify-center items-center min-h-screen ${
+                className={`flex flex-col justify-center items-center  ${
                     theme === "dark" ? "bg-darkModeBG text-darkModeT" : "bg-lightModeBG text-lightModeT"
                 }`}
             >
