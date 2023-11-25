@@ -73,12 +73,7 @@ export default function Home() {
                 theme === "dark" ? "bg-darkModeBG text-darkModeT" : "bg-lightModeBG text-lightModeT"
             }`}
         >
-            {theme ? (
-                <NavBar theme={theme} toggleTheme={toggleTheme} />
-            ) : (
-                <Image src={"/images/loader.svg"} width={40} height={40} alt="loading_icon" />
-            )}
-
+            <NavBar theme={theme} toggleTheme={toggleTheme} />
             <SearchBar
                 input={input}
                 inputChange={handleInputChange}
