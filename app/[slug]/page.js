@@ -26,10 +26,12 @@ export default function CountryPage({ params }) {
 
     const borderCountries = (alpha3Codes, dataSet) => {
         const dataMap = new Map(dataSet.map((obj) => [obj.cca3, obj]));
-        return alpha3Codes.map((code) => dataMap.get(code)).filter((obj) => obj !== undefined);
+
+        const codes = typeof alpha3Codes === "string" ? [alpha3Codes] : alpha3Codes;
+
+        return codes.map((code) => dataMap.get(code)).filter((obj) => obj !== undefined);
     };
 
-    console.log(borderCountries(borderList, apiData));
     const borderCountriesList = slugInfo.borders ? borderCountries(borderList, apiData) : [];
 
     const currencies = slugInfo.currencies ? (

@@ -14,12 +14,12 @@ describe("My First Test", () => {
     it("Types characters into the search bar and finds card", () => {
         cy.get("input").type("united states");
         cy.get("input").should("have.value", "united states");
-        cy.contains("United States of America");
+        cy.contains("United States");
     });
 
     it("Clicks on a country link and find info titles", () => {
-        cy.contains("United States of America").click();
-        cy.contains("United States of America");
+        cy.contains("United States").click();
+        cy.contains("United States");
         cy.contains("Native Name: ");
         cy.contains("Population: ");
         cy.contains("Region: ");
