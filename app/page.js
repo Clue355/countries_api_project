@@ -68,45 +68,48 @@ export default function Home() {
     };
 
     return (
-        <main
-            className={`flex flex-col justify-center items-center min-h-screen ${
-                theme === "dark" ? "bg-darkModeBG text-darkModeT" : "bg-lightModeBG text-lightModeT"
-            }`}
-        >
+        <>
             <NavBar theme={theme} toggleTheme={toggleTheme} />
-            <SearchBar
-                input={input}
-                inputChange={handleInputChange}
-                region={region}
-                setRegion={setRegion}
-                dropdownChange={handleDropdownChange}
-                theme={theme}
-            />
-            <div className="flex flex-wrap justify-center mb-[12rem] w-full max-w-1440">
-                {fData.length > 0
-                    ? fData.map((item) => (
-                          <CountryCard
-                              key={item.name.common}
-                              name={item.name.common}
-                              image={item.flags.png}
-                              pop={item.population}
-                              region={item.region}
-                              capital={item.capital}
-                              theme={theme}
-                          />
-                      ))
-                    : apiData.map((item) => (
-                          <CountryCard
-                              key={item.name.common}
-                              name={item.name.common}
-                              image={item.flags.png}
-                              pop={item.population}
-                              region={item.region}
-                              capital={item.capital}
-                              theme={theme}
-                          />
-                      ))}
-            </div>
-        </main>
+            <main
+                className={`flex flex-col justify-center items-center  ${
+                    theme === "dark" ? "bg-darkModeBG text-darkModeT" : "bg-lightModeBG text-lightModeT"
+                }`}
+            >
+                <SearchBar
+                    input={input}
+                    inputChange={handleInputChange}
+                    region={region}
+                    setRegion={setRegion}
+                    dropdownChange={handleDropdownChange}
+                    theme={theme}
+                />
+
+                <div className="flex flex-wrap justify-center mb-[12rem] w-full max-w-1440">
+                    {fData.length > 0
+                        ? fData.map((item) => (
+                              <CountryCard
+                                  key={item.name.common}
+                                  name={item.name.common}
+                                  image={item.flags.png}
+                                  pop={item.population}
+                                  region={item.region}
+                                  capital={item.capital}
+                                  theme={theme}
+                              />
+                          ))
+                        : apiData.map((item) => (
+                              <CountryCard
+                                  key={item.name.common}
+                                  name={item.name.common}
+                                  image={item.flags.png}
+                                  pop={item.population}
+                                  region={item.region}
+                                  capital={item.capital}
+                                  theme={theme}
+                              />
+                          ))}
+                </div>
+            </main>
+        </>
     );
 }
