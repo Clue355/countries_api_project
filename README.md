@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./image.png)
+![](screenshot.png))
 
 ### Links
 
@@ -57,9 +57,22 @@ Users should be able to:
 describe("My First Test", () => {
     beforeEach(() => { cy.visit("http://localhost:3000/"); });
 
-    it("Finds a search bar", ()
-    => { cy.get("input"); });
+    it("put's the lotion on it's skin or it gets the hose again", ()
+    => { cy.put("the lotion on it's skin"); });
 })
+```
+
+-   How to check and convert a non ASCII character to an ASCII character
+
+```
+const normalizeString = (str) => {
+    return /[^\u0000-\u007F]+/.test(str)
+        ? str
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toLowerCase()
+        : str.toLowerCase();
+};
 ```
 
 ### Continued development
