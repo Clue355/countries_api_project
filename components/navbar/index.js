@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function NavBar({ theme, toggleTheme }) {
     return (
         <div
-            className={`w-full flex flex-row justify-center items-center  h-max py-[1rem] shadow-md ${
+            className={`sticky top-0 z-50 w-full flex flex-row justify-center items-center  h-max py-[1rem] shadow-md  ${
                 theme === "dark" ? "bg-darkModeE text-darkModeT" : "bg-lightModeE text-lightModeT"
             }`}
         >

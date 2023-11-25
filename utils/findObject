@@ -6,6 +6,10 @@ export const findObject = (target, arr, region) => {
 
     // Function to normalize a string if needed
     const normalizeString = (str) => {
+        if (typeof str !== "string") {
+            console.error("Expected a string, but received:", str);
+            return "";
+        }
         return /[^\u0000-\u007F]+/.test(str)
             ? str
                   .normalize("NFD")
@@ -16,21 +20,21 @@ export const findObject = (target, arr, region) => {
 
     // Normalize target and region for case-insensitive comparison
     const normalizedTarget = normalizeString(target);
-    const normalizedRegion = normalizeString(region);
 
     // Exit condition if neither target nor region is provided
-    if (normalizedTarget === "" && normalizedRegion === "") {
+    if (normalizedTarget === "" && region === "") {
         return arr;
     }
 
     // Filter based on region and target
     let filtered = arr.filter((obj) => {
-        const objNameNormalized = normalizeString(obj.name);
+        console.log(obj);
+        const objNameNormalized = normalizeString(obj.name.common);
         const objRegionNormalized = normalizeString(obj.region);
 
-        if (normalizedRegion) {
+        if (region) {
             return (
-                objRegionNormalized === normalizedRegion &&
+                objRegionNormalized === region &&
                 (normalizedTarget === "" || objNameNormalized.includes(normalizedTarget))
             );
         }

@@ -1,25 +1,31 @@
 "use client";
 import Image from "next/image";
-import NavBar from "../components/navbar";
-
-import data from "./data.json";
-import CountryCard from "../components/country_card";
-import SearchBar from "../components/searchbar";
+import Head from "next/head";
 
 import { useState, useEffect } from "react";
 
-import Head from "next/head";
+import data from "./data.json";
+
+import NavBar from "../components/navbar";
+import CountryCard from "../components/country_card";
+import SearchBar from "../components/searchbar";
 
 import { findObject } from ".././utils/findObject";
 
 import { useAtom } from "jotai";
 import { themeAtom } from "../atoms/themeAtom";
+import { filteredDataAtom, apiDataAtom, inputAtom, regionAtom } from "../atoms/apiAtom";
+
+import useFetchData from "../hooks/useFetchData";
 
 export default function Home() {
-    const [input, setInput] = useState("");
-    const [region, setRegion] = useState("");
-    const [fData, setFData] = useState([]);
+    const [input, setInput] = useAtom(inputAtom);
+    const [region, setRegion] = useAtom(regionAtom);
     const [theme, setTheme] = useAtom(themeAtom);
+    const [fData, setFData] = useAtom(filteredDataAtom);
+    const [apiData, setApiData] = useAtom(apiDataAtom);
+
+    const fetchData = useFetchData();
 
     const handleInputChange = (event) => {
         setInput(event.target.value);
@@ -30,14 +36,23 @@ export default function Home() {
     };
 
     useEffect(() => {
-        let filteredData = findObject(input, data, region);
-        setFData(filteredData);
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        const currentInput = input;
+        const currentRegion = region;
+        const currentApiData = apiData;
+
+        const filtered = findObject(currentInput, currentApiData, currentRegion);
+        setFData(filtered);
+
         // theme stored in local storage
         const storedTheme = localStorage.getItem("theme");
         if (storedTheme) {
             setTheme(storedTheme);
         }
-    }, [input, region, setTheme]);
+    }, [setTheme, input, region, apiData, setFData]);
 
     // colors: {
     //     darkModeBG: "hsl(207, 26%, 17%)",
@@ -58,7 +73,12 @@ export default function Home() {
                 theme === "dark" ? "bg-darkModeBG text-darkModeT" : "bg-lightModeBG text-lightModeT"
             }`}
         >
-            <NavBar theme={theme} toggleTheme={toggleTheme} />
+            {theme ? (
+                <NavBar theme={theme} toggleTheme={toggleTheme} />
+            ) : (
+                <Image src={"/images/loader.svg"} width={40} height={40} alt="loading_icon" />
+            )}
+
             <SearchBar
                 input={input}
                 inputChange={handleInputChange}
@@ -71,20 +91,20 @@ export default function Home() {
                 {fData.length > 0
                     ? fData.map((item) => (
                           <CountryCard
-                              key={item.name}
-                              name={item.name}
-                              image={item.flag}
+                              key={item.name.common}
+                              name={item.name.common}
+                              image={item.flags.png}
                               pop={item.population}
                               region={item.region}
                               capital={item.capital}
                               theme={theme}
                           />
                       ))
-                    : data.map((item) => (
+                    : apiData.map((item) => (
                           <CountryCard
-                              key={item.name}
-                              name={item.name}
-                              image={item.flag}
+                              key={item.name.common}
+                              name={item.name.common}
+                              image={item.flags.png}
                               pop={item.population}
                               region={item.region}
                               capital={item.capital}
