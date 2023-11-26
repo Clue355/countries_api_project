@@ -46,6 +46,8 @@ Users should be able to:
 -   [Tailwind](https://tailwindui.com/) - For styles
 -   [PnPm](https://pnpm.io/) - disk space efficient package manager
 -   [Cypress](https://www.cypress.io/) - easily create tests for your modern web applications
+-   [Github Actions](https://github.com/features/actions) - GitHub Actions makes it easy to automate all your software
+    workflows
 
 ### What I learned
 
@@ -75,11 +77,38 @@ const normalizeString = (str) => {
 };
 ```
 
+-   How to setup a Github Actions yml file
+
+```
+name: Next.js CI/CD
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4.1.1
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4.0.0
+              with:
+                  node-version: "20.9.0"
+
+            - name: Install pnpm
+              run: npm install -g pnpm
+```
+
 ### Continued development
 
 What I want to continue learning:
 
 -   Adding different tests to my project
+-   more about CI/CD tools
 
 ### Useful resources
 
