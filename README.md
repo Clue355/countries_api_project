@@ -119,4 +119,4 @@ What I want to continue learning:
 
 -   Website - [Portfolio](https://carlosluevano.netlify.app/)
 -   Frontend Mentor - [@Clue355](https://www.frontendmentor.io/profile/Clue355)
--   Twitter - [LinkedIn](https://www.linkedin.com/in/carlos-luevano/)
+-   Linkedin - [Link](https://www.linkedin.com/in/carlos-luevano/)
